@@ -2,7 +2,7 @@ import React from "react";
 import { api } from "../utils/api";
 import Card from "./Card";
 
-function Main(props) {
+function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
   const [userName, setUserName] = React.useState("");
   const [userDescription, setUserDescription] = React.useState("");
   const [userAvatar, setUserAvatar] = React.useState("");
@@ -25,7 +25,7 @@ function Main(props) {
     <main className="content">
       <section className="profile">
         <div className="profile__items">
-          <button className="profile__pic-button" onClick={props.onEditAvatar}>
+          <button className="profile__pic-button" onClick={onEditAvatar}>
             <img
               className="profile__pic"
               src={userAvatar}
@@ -38,21 +38,21 @@ function Main(props) {
             <button
               className="profile__edit-button"
               type="button"
-              onClick={props.onEditProfile}
-            ></button>
+              onClick={onEditProfile}
+            />
           </div>
         </div>
         <button
           className="profile__add-button"
           type="button"
-          onClick={props.onAddPlace}
-        ></button>
+          onClick={onAddPlace}
+        />
       </section>
 
       <section className="elements">
         <ul className="elements__items">
           {cards.map((card) => (
-            <Card key={card._id} card={card} onCardClick={props.onCardClick} />
+            <Card key={card._id} card={card} onCardClick={onCardClick} />
           ))}
         </ul>
       </section>
