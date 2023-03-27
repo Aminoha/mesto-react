@@ -1,46 +1,59 @@
-// import logo from "./logo.svg";
+import React from "react";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
-import ImagePopup from "./ImagePopup"
+import ImagePopup from "./ImagePopup";
 
 function App() {
+  const [isEditProfilePopupOpen, setEditProfile] = React.useState(false);
+  const [isAddPlacePopupOpen, setAddPlace] = React.useState(false);
+  const [isEditAvatarPopupOpen, setEditAvatar] = React.useState(false);
 
-
-
-  const onEditProfile = () => {
-    document.querySelector('.popup_update-avatar').classList.add('popup_opened')
-        
+  function handleEditProfileClick() {
+    setEditProfile(true);
   }
 
-  // function handleEditProfileClick() {
-  //   document.querySelector('.popup_edit-profle').classList.add('popup_opened')
-        
-  // }
+  function handleEditAvatarClick() {
+    setEditAvatar(true);
+  }
 
-  // function handleAddPlaceClick() {
-  //   document.querySelector('.popup_add-card').classList.add('popup_opened')
-        
-  // }
+  function handleAddPlaceClick() {
+    setAddPlace(true);
+  }
 
+  function closeAllPopups() {
+    setEditProfile(false);
+    setEditAvatar(false);
+    setAddPlace(false);
+  }
 
   return (
-    <body className="body">
+    <>
       <div className="page">
         <Header />
-        <Main />
+        <Main
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          onEditAvatar={handleEditAvatarClick}
+        />
         <Footer />
 
-        <PopupWithForm name="edit-profle" title="Редактировать профиль">
+        <PopupWithForm
+          name="edit-profle"
+          title="Редактировать профиль"
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          
+        >
           <input
             id="name-input"
             className="popup__input popup__input_el_name"
             name="name"
-            value=""
+            defaultValue=""
             placeholder="Введите имя"
-            minlength="2"
-            maxlength="40"
+            minLength="2"
+            maxLength="40"
             required
           />
           <span id="name-input-error" className="popup__input-error"></span>
@@ -48,10 +61,10 @@ function App() {
             id="descr-input"
             className="popup__input popup__input_el_descr"
             name="about"
-            value=""
+            defaultValue=""
             placeholder="О себе"
-            minlength="2"
-            maxlength="200"
+            minLength="2"
+            maxLength="200"
             required
           />
           <span
@@ -60,15 +73,20 @@ function App() {
           ></span>
         </PopupWithForm>
 
-        <PopupWithForm name="add-card" title="Новое место">
+        <PopupWithForm
+          name="add-card"
+          title="Новое место"
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+        >
           <input
             id="title-input"
             className="popup__input popup__input_el_name"
             name="name"
-            value=""
+            defaultValue=""
             placeholder="Название"
-            minlength="2"
-            maxlength="30"
+            minLength="2"
+            maxLength="30"
             required
           />
           <span id="title-input-error" className="popup__input-error"></span>
@@ -77,20 +95,25 @@ function App() {
             className="popup__input popup__input_el_descr"
             type="url"
             name="link"
-            value=""
+            defaultValue=""
             placeholder="Ссылка на картинку"
             required
           />
           <span id="url-input-error" className="popup__input-error"></span>
         </PopupWithForm>
 
-        <PopupWithForm name="update-avatar" title="Обновить аватар">
+        <PopupWithForm
+          name="update-avatar"
+          title="Обновить аватар"
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+        >
           <input
             id="avatar-input"
             className="popup__input popup__input_el_descr"
             type="url"
             name="avatar"
-            value=""
+            defaultValue=""
             placeholder="Ссылка на картинку"
             required
           />
@@ -100,30 +123,7 @@ function App() {
         <PopupWithForm name="delete" title="Вы уверены?" />
         <ImagePopup />
       </div>
-      <template className="card-template">
-        <li className="elements__item">
-          <article className="elements__card">
-            <button
-              type="button"
-              className="elements__delete"
-              name="trash"
-            ></button>
-            <img className="elements__img" src="#" alt="" />
-            <div className="elements__group">
-              <h2 className="elements__name"></h2>
-              <div className="elements__like">
-                <button
-                  type="button"
-                  className="elements__icon"
-                  name="like"
-                ></button>
-                <p className="elements__count">5</p>
-              </div>
-            </div>
-          </article>
-        </li>
-      </template>
-    </body>
+    </>
   );
 }
 
