@@ -22,5 +22,8 @@
 14. Деструктуризация
 15. Api
 16. React
+17. Provider
+18. Хуки
+19. ref
 
 Страница проекта находится [здесь](https://aminoha.github.io/mesto-react/)

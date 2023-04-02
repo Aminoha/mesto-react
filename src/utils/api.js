@@ -18,19 +18,19 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  getCards() {
+  getCardList() {
     return fetch(`${this._path}/cards`, {
       headers: this._getHeaders(),
     }).then(this._getJson);
   }
 
-  getUsers() {
+  getUserInfo() {
     return fetch(`${this._path}/users/me`, {
       headers: this._getHeaders(),
     }).then(this._getJson);
   }
 
-  updateUser({ name, about }) {
+  setUserInfo({ name, about }) {
     return fetch(`${this._path}/users/me`, {
       method: "PATCH",
       headers: this._getHeaders(),
@@ -38,6 +38,15 @@ class Api {
         name: `${name}`,
         about: `${about}`,
       }),
+    }).then(this._getJson);
+  }
+
+  setUserAvatar(data) {
+    console.log(data);
+    return fetch(`${this._path}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._getHeaders(),
+      body: JSON.stringify(data),
     }).then(this._getJson);
   }
 
@@ -72,14 +81,6 @@ class Api {
       headers: this._getHeaders(),
     }).then(this._getJson);
   }
-
-  updateAvatar(data) {
-    return fetch(`${this._path}/users/me/avatar`, {
-      method: "PATCH",
-      headers: this._getHeaders(),
-      body: JSON.stringify(data),
-    }).then(this._getJson);
-  }
 }
 
 const api = new Api(
@@ -87,4 +88,4 @@ const api = new Api(
   "10e895f5-9c21-4560-ae6a-6a7ed41c5744"
 );
 
-export { api };
+export default api;
