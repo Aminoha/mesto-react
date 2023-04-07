@@ -42,7 +42,6 @@ class Api {
   }
 
   setUserAvatar(data) {
-    console.log(data);
     return fetch(`${this._path}/users/me/avatar`, {
       method: "PATCH",
       headers: this._getHeaders(),
