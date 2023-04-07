@@ -1,8 +1,8 @@
-import React from "react";
+import { useRef, useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
 
 function EditAvatarPopup(props) {
-  const refInput = React.useRef('');
+  const refInput = useRef(null);
 
   function handleSumbit(event) {
     event.preventDefault();
@@ -10,6 +10,10 @@ function EditAvatarPopup(props) {
       avatar: refInput.current.value,
     });
   }
+
+  useEffect(() => {
+    refInput.current.value = "";
+  }, [props.isOpen]);
 
   return (
     <PopupWithForm

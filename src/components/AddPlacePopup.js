@@ -1,9 +1,9 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
 
 function AddPlacePopup(props) {
-  const [name, setName] = React.useState('');
-  const [link, setLink] = React.useState('');
+  const [name, setName] = useState("");
+  const [link, setLink] = useState("");
 
   function handleSumbit(evt) {
     evt.preventDefault();
@@ -11,17 +11,19 @@ function AddPlacePopup(props) {
       name,
       link,
     });
-
-    setName("");
-    setLink("");
   }
 
+  useEffect(() => {
+    setName("");
+    setLink("");
+  }, [props.isOpen]);
+
   function hadleChangeName(evt) {
-    setName(evt.target.value)
+    setName(evt.target.value);
   }
 
   function hadleChangeLink(evt) {
-    setLink(evt.target.value)
+    setLink(evt.target.value);
   }
 
   return (
